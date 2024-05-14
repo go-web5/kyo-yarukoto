@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import styled from "styled-components";
+import GlobalStyles from "./GlobalStyles";
+import Todo from "./components/Todo";
+import { TodoProvider } from "./context";
+
+const Title = styled.h1`
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.6rem;
+  @media screen and (max-width: 500px) {
+    font-size: 1.2rem;
+  }
+`;
+const Wrapper = styled.div`
+  padding: 40px 0;
+`;
+const Inner = styled.div`
+  width: 100%;
+  max-width: 500px;
+  margin-inline: auto;
+  padding: 0 48px;
+  @media screen and (max-width: 500px) {
+    max-width: 100%;
+    padding: 0 4vw;
+  }
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <TodoProvider>
+      <Wrapper>
+        <Inner>
+          <GlobalStyles />
+          <Title>今日やることリスト</Title>
+          <Todo />
+        </Inner>
+      </Wrapper>
+    </TodoProvider>
+  );
 }
 
-export default App
+export default App;
