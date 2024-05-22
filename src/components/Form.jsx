@@ -1,6 +1,7 @@
 import { useTodoContext } from "../context/TodoContext";
 import { useState } from "react";
 import styled from "styled-components";
+import todoApi from "../api/todo";
 
 const FormWrapper = styled.div`
   margin-top: 30px;
@@ -8,6 +9,7 @@ const FormWrapper = styled.div`
     margin-top: 8vw;
   }
 `;
+
 const Input = styled.input`
   width: calc(100% - 106px);
   margin-right: 6px;
@@ -26,13 +28,17 @@ const Form = () => {
   
   const addTodo = (e) => {
     e.preventDefault();
-
+    
     const newTodo = {
       id: Math.floor(Math.random() * 1e5),
       content: enteredTodo,
+      editing: false
     }
-    createTodo(newTodo);
-    setEnteredTodo("");
+    
+    todoApi.post(newTodo).then(newTodo => {
+      createTodo(newTodo);
+      setEnteredTodo("");
+    })
   }
 
   return (
@@ -43,7 +49,7 @@ const Form = () => {
           value={enteredTodo}
           onChange={(e) => setEnteredTodo(e.target.value)}
         />
-        <button className="">追加</button>
+        <button>追加</button>
       </form>
     </FormWrapper>
   );

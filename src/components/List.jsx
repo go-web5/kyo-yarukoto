@@ -1,32 +1,13 @@
 import { useTodoContext } from "../context/TodoContext";
-import styled from "styled-components";
-
-const TodoText = styled.span`
-  margin-left: 6px;
-  @media screen and (max-width: 500px) {
-    margin-top: 6px;
-  }
-`;
+import Item from "./Item";
 
 const List = () => {
-  const { todos, deleteTodo } = useTodoContext();
-
-  const complete = (id) => {
-    deleteTodo(id);
-  };
+  const { todos } = useTodoContext();
 
   return (
-    <>
-      <ul>
-        {todos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <button onClick={() => complete(todo.id)}>完了</button><TodoText>{todo.content}</TodoText>
-            </li>
-          )
-        })}
-      </ul>
-    </>
+    <ul>
+      {todos.map(todo => <Item todo={todo} key={todo.id} />)}
+    </ul>
   );
 }
 

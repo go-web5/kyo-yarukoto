@@ -35,6 +35,9 @@ const GlobalStyles = createGlobalStyle`
       margin-top: 3vw;
     }
   }
+  input {
+    font-size: inherit;
+  }
 `;
 
 export default GlobalStyles;
