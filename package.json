@@ -13,6 +13,7 @@
     "start:client": "cross-env PORT=3001 vite"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
     "axios": "^1.6.8",
     "concurrently": "^8.2.2",
     "react": "^18.2.0",
