@@ -4,23 +4,67 @@ import { useState } from "react";
 import PropTypes from 'prop-types';
 import todoApi from "../api/todo";
 
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
+const Todo = styled.li`
+  display: grid;
+  place-items: center;
+  grid-template-columns: 100px 1fr;
+  column-gap: 6px;
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 20vw 1fr;
+    column-gap: 1.5vw;
+  }
+  & + & {
+    margin-top: 6px;;
+    @media screen and (max-width: 500px) {
+    margin-top: 1.5vw;;
+  }
+  }
+`;
+
 const TodoText = styled.span`
   margin-left: 6px;
+  cursor: pointer;
   @media screen and (max-width: 500px) {
     margin-top: 6px;
   }
 `;
 
 const EditTodoText = styled.input`
-  margin-left: 6px;
-  @media screen and (max-width: 500px) {
-    margin-top: 6px;
-  }
+  display: inline-block;
+  width: 100%;
+`;
+
+const Form = styled.form`
+  width: 100%;
+  display: inline-block;
 `;
 
 const Item = ( {todo} ) => {
   const { deleteTodo, updateTodo } = useTodoContext();
   const [ editingContent, setEditingContent ] = useState(todo.content ? todo.content : "");
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef, 
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: todo.id });
+  
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+    opacity: isDragging ? 0.5 : 1,
+    padding: "10px",
+    border: "1px solid #dbdbdb",
+    backgroundColor: "white",
+    cursor: "grab",
+    borderRadius: "100vmax"
+  }
 
   const complete = (todo) => {
     todoApi.delete(todo).then(() => {
@@ -46,22 +90,30 @@ const Item = ( {todo} ) => {
   }
 
   return (
-    <li key={todo.id}>
-      <button onClick={() => complete(todo)}>完了</button>
-      <form onSubmit={confirmContent} style={{ display: "inline" }}>
+    <Todo key={todo.id}
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      {...transform}
+      {...transition}
+      style={style}
+    >
+      <button className="c-button" onClick={() => complete(todo)}>完了</button>
+      <Form onSubmit={confirmContent}>
         {
           todo.editing ? (
             <EditTodoText
               type="text"
               value={editingContent}
               onChange={changeContent}
+              onClick={(e) => e.stopPropagation()}
             />
           ) : (
             <TodoText onDoubleClick={toggleEditMode}>{todo.content}</TodoText>
           )
         }
-      </form>
-    </li>
+      </Form>
+    </Todo>
   );
 }
 

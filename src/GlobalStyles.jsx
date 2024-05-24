@@ -9,7 +9,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-size: 1rem;
   }
-  button {
+  .c-button {
     font-size: inherit;
     width: 100px;
     color: black;
@@ -27,12 +27,6 @@ const GlobalStyles = createGlobalStyle`
     &:hover {
       color: white;
       background-color: black;
-    }
-  }
-  li + li {
-    margin-top: 6px;
-    @media screen and (max-width: 500px) {
-      margin-top: 3vw;
     }
   }
   input {

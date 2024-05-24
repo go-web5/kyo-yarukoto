@@ -49,7 +49,7 @@ const Form = () => {
           value={enteredTodo}
           onChange={(e) => setEnteredTodo(e.target.value)}
         />
-        <button>追加</button>
+        <button className="c-button">追加</button>
       </form>
     </FormWrapper>
   );
