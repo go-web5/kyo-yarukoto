@@ -22,3 +22,16 @@ $ npm start
 $ npm run build
 ```
 
+## REST Client 使い方
+VS Code上でHTTPリクエストを送信し、レスポンスを確認する方法
+
+1. VS Code拡張機能「REST Client」インストールする
+
+2. .httpのファイルを開き、HTTPリクエストを送信する
+- 「Send Request」をクリックする
+
+- または、各メソッドの行にカーソルを移動して以下コマンドをうつ
+ - Windows : Ctrl + Alt + R
+ - Mac : Cmd + Alt + R
+
+3. Responseタブが出現し、そこにレスポンス内容が表示される
