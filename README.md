@@ -14,6 +14,11 @@ $ npm i
 
 ## Development
 ```
+$ npm run dev
+```
+
+## JSON Server
+```
 $ npm start
 ```
 
