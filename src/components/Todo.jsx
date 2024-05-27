@@ -2,6 +2,7 @@ import List from "./List";
 import Form from "./Form";
 import styled from "styled-components";
 import { useTodoContext } from "../context/TodoContext";
+import todoApi from "../api/todo";
 
 import {
   DndContext,
@@ -23,21 +24,29 @@ const Main = styled.div`
 `;
 
 const Todo = () => {
-  const { setTodos } = useTodoContext();
-  
+  const { todos, setTodos } = useTodoContext();
+
   const sensors = useSensors(
     useSensor(PointerSensor),
   );
 
   const handleDragEnd = (event) => {
-    const {active, over} = event;
+    const { active, over } = event;
 
     if (active.id !== over.id) {
-      setTodos((todos) => {
-        const oldIndex = todos.findIndex(todo => todo.id === active.id);
-        const newIndex = todos.findIndex(todo => todo.id === over.id);
-        return arrayMove(todos, oldIndex, newIndex);
-      });
+      const oldIndex = todos.findIndex(todo => todo.id === active.id);
+      const newIndex = todos.findIndex(todo => todo.id === over.id);
+      const updatedTodos = arrayMove(todos, oldIndex, newIndex);
+        
+      console.log(updatedTodos);
+      // 並べ変えた後の配列が出力される
+
+      todoApi.sort(updatedTodos).then(res => {
+        console.log(res);
+        // エラー : Failed to load resource: the server responded with a status of 404 (Not Found)
+        setTodos(res);
+      })
+      
     }
   };
 
