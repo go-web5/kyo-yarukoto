@@ -28,6 +28,31 @@ const todoApi = {
     // ENDPOINT_URL の後にtodoのidをつける必要あり、第二引数に更新用の値
     const result = await axios.put(ENDPOINT_URL + '/' + todo.id, todo);
     return result.data;
+  },
+
+  // dnd-kitのソートによる順番変更
+  async sort(todos) {
+    try {
+      // 第二引数に更新用の値
+      const result = await axios.put(ENDPOINT_URL, todos);
+      console.log(result);
+      return result.data;
+      
+    } catch (error) {
+
+      if (error.response) {
+        console.error('API request failed with status:', error.response.status);
+        console.error('Response data:', error.response.data);
+
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+        
+      } else {
+        console.error('Error setting up request:', error.message);
+      }
+      throw error;
+    }
+
   }
 }
 
