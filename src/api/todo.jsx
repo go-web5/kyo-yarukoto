@@ -35,7 +35,6 @@ const todoApi = {
     try {
       // 第二引数に更新用の値
       const result = await axios.put(ENDPOINT_URL, todos);
-      console.log(result);
       return result.data;
       
     } catch (error) {

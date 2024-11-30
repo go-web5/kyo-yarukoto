@@ -56,8 +56,8 @@ const Item = ( {todo} ) => {
   } = useSortable({ id: todo.id });
   
   const style = {
-    transition,
-    transform: CSS.Transform.toString(transform),
+    transition: transition || "transform 0.2s ease",
+    transform: transform ? CSS.Transform.toString(transform) : "none",
     opacity: isDragging ? 0.5 : 1,
     padding: "10px",
     border: "1px solid #dbdbdb",

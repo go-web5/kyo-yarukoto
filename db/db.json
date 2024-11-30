@@ -19,6 +19,26 @@
       "id": "92490",
       "content": "仕事をする",
       "editing": false
+    },
+    {
+      "id": "67656",
+      "content": "ゴミ出しする",
+      "editing": false
+    },
+    {
+      "id": "60904",
+      "content": "夜ご飯を作る",
+      "editing": false
+    },
+    {
+      "id": "29446",
+      "content": "バナナを買う",
+      "editing": false
+    },
+    {
+      "id": "4208",
+      "content": "バナナを売る",
+      "editing": false
     }
   ]
 }

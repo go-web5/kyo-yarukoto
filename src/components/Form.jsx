@@ -30,7 +30,7 @@ const Form = () => {
     e.preventDefault();
     
     const newTodo = {
-      id: Math.floor(Math.random() * 1e5),
+      id: Math.floor(Math.random() * 1e5).toString(),
       content: enteredTodo,
       editing: false
     }

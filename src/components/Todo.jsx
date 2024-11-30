@@ -30,25 +30,16 @@ const Todo = () => {
     useSensor(PointerSensor),
   );
 
-  const handleDragEnd = (event) => {
+  const handleDragEnd = async (event) => {
     const { active, over } = event;
-
     if (active.id !== over.id) {
       const oldIndex = todos.findIndex(todo => todo.id === active.id);
       const newIndex = todos.findIndex(todo => todo.id === over.id);
       const updatedTodos = arrayMove(todos, oldIndex, newIndex);
-        
-      console.log(updatedTodos);
-      // 並べ変えた後の配列が出力される
-
-      todoApi.sort(updatedTodos).then(res => {
-        console.log(res);
-        // エラー : Failed to load resource: the server responded with a status of 404 (Not Found)
-        setTodos(res);
-      })
-      
+      setTodos(updatedTodos);
+      await todoApi.sort(updatedTodos);
     }
-  };
+  }
 
   return (
     <Main>
