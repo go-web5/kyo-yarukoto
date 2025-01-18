@@ -27,7 +27,7 @@ const Todo = () => {
   const { todos, setTodos } = useTodoContext();
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
   );
 
   const handleDragEnd = async (event) => {

@@ -94,8 +94,6 @@ const Item = ( {todo} ) => {
       ref={setNodeRef}
       {...attributes}
       {...listeners}
-      {...transform}
-      {...transition}
       style={style}
     >
       <button className="c-button" onClick={() => complete(todo)}>完了</button>
